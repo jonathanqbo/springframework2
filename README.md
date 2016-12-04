@@ -7,13 +7,13 @@ Spring Boot + Spring Data JPA + Spring Data Mongodb + Spring Batch
 
 [mysql docker usage: https://hub.docker.com/r/mysql/mysql-server/](https://hub.docker.com/r/mysql/mysql-server/)
 
-1. pull mysql offical docker file
+1) ###pull mysql offical docker file
 
 ```
 BQMac:mysql5.7 qibo$ docker pull mysql/mysql-server
 ```
 
-2. start docker container
+2) ###start docker container
 
 ```
 BQMac:mysql5.7 qibo$ docker run --name bq-mysql-container -p 3306:3306 -e MYSQL_ROOT_PASSWORD=password -e MYSQL_ROOT_HOST=172.17.0.1 -d mysql/mysql-server
