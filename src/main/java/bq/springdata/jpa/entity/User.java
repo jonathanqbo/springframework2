@@ -1,11 +1,16 @@
 package bq.springdata.jpa.entity;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class User {
@@ -29,6 +34,15 @@ public class User {
 	private Date birthday;
 	
 	private String password;
+	
+	// don't need do persist manually by setting entity Cascade Type to PERSIST
+	@OneToOne(cascade=CascadeType.PERSIST)
+	@JoinColumn(name = "pk_homeaddress")
+	private Address homeAddress;
+	
+	// don't need do persist manually by setting entity Cascade Type to PERSIST
+	@OneToMany(mappedBy="user", cascade=CascadeType.PERSIST)
+	private List<Address> historyAddress;
 	
 	public long getId() {
 		return id;
@@ -102,4 +116,28 @@ public class User {
 		this.password = password;
 	}
 
+	public Address getHomeAddress() {
+		return homeAddress;
+	}
+
+	public void setHomeAddress(Address homeAddress) {
+		this.homeAddress = homeAddress;
+	}
+
+	public List<Address> getHistoryAddress() {
+		return historyAddress;
+	}
+
+	public void setHistoryAddress(List<Address> historyAddress) {
+		this.historyAddress = historyAddress;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", userName=" + userName
+				+ ", email=" + email + ", cellPhone=" + cellPhone + ", homePhone=" + homePhone + ", birthday="
+				+ birthday + ", password=" + password + ", homeAddress=" + homeAddress + ", historyAddress="
+				+ historyAddress + "]";
+	}
+	
 }
